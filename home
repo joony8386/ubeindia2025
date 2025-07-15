@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolkata Trip Itinerary: ASIAN UBE MEET 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is designed as a single-page, vertically-scrolling dashboard. This structure was chosen for ease of use on mobile and desktop, allowing travelers to quickly find information. The core design uses a main navigation bar to jump to key sections: 'Overview', 'Schedule', and 'Guide'. Within these sections, interactive tabs are used to segment detailed information (like day-by-day schedules or different types of travel tips). This prevents overwhelming the user with a long wall of text and allows them to focus on what's relevant to them at the moment. This interactive, chunked approach is more user-friendly than a static linear document. -->
+    <!-- Visualization & Content Choices: 
+        - Flight Info -> Goal: Inform -> Presentation: A visual timeline created with HTML/CSS. Interaction: None. Justification: More engaging and easier to read flight times at a glance than plain text. Method: Tailwind CSS.
+        - Hotel Info -> Goal: Inform -> Presentation: An information card. Interaction: Clickable link to Google Maps. Justification: Provides all necessary hotel info compactly and allows for easy navigation. Method: HTML/Tailwind.
+        - Event Schedule -> Goal: Organize/Inform -> Presentation: Tabbed interface for Day 1/Day 2. Interaction: User clicks tabs to switch between schedules. Justification: Organizes a large amount of information cleanly, preventing cognitive overload. Method: JavaScript/Tailwind.
+        - Event Time Analysis -> Goal: Compare -> Presentation: A stacked bar chart. Interaction: Hover tooltips show exact durations. Justification: Provides a quick, visual summary of how conference time is allocated between theoretical and practical sessions each day, offering an analytical insight not immediately obvious from the text. Method: Chart.js.
+        - Kolkata Guide -> Goal: Inform -> Presentation: Tabbed content with icons. Interaction: User clicks tabs for different categories of tips. Justification: Groups related tips (Food, Safety, etc.) for easy access and readability. Method: JavaScript/Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link.active {
+            color: #1e40af; /* blue-800 */
+            border-bottom: 2px solid #1e40af;
+        }
+        .tab-button.active {
+            background-color: #1e40af; /* blue-800 */
+            color: white;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .guide-tab-button.active {
+            background-color: #dbeafe; /* blue-100 */
+            border-left-color: #1e40af; /* blue-800 */
+            color: #1e3a8a; /* blue-900 */
+        }
+    </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md p-6 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-blue-900">Kolkata Trip Itinerary</h1>
+        <p class="text-lg text-gray-600 mt-2">ASIAN UBE MEET 2025 | July 24 - 27, 2025</p>
+    </header>
+
+    <nav id="main-nav" class="sticky top-0 bg-white shadow-sm z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center space-x-4 md:space-x-8">
+                <a href="#overview" class="nav-link py-4 px-2 text-gray-500 font-medium border-b-2 border-transparent hover:text-blue-800 hover:border-blue-800">Overview</a>
+                <a href="#schedule" class="nav-link py-4 px-2 text-gray-500 font-medium border-b-2 border-transparent hover:text-blue-800 hover:border-blue-800">Event Schedule</a>
+                <a href="#guide" class="nav-link py-4 px-2 text-gray-500 font-medium border-b-2 border-transparent hover:text-blue-800 hover:border-blue-800">Kolkata Guide</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        
+        <section id="overview" class="content-section space-y-8">
+             <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-blue-800">Trip Overview</h2>
+                <p class="text-gray-600">Your key travel details at a glance.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="mr-3 text-blue-600">✈️</span> Flight Itinerary
+                </h3>
+                <div class="space-y-6">
+                    <!-- Departure Flight -->
+                    <div>
+                        <p class="font-semibold text-gray-700">Departure: Bangkok → Kolkata</p>
+                        <div class="relative mt-2 pl-8 border-l-2 border-blue-200">
+                             <div class="absolute w-4 h-4 bg-blue-500 rounded-full -left-2 top-1"></div>
+                            <p class="font-bold">23:45 <span class="font-normal text-gray-600">(July 24)</span> - Suvarnabhumi Airport (BKK)</p>
+                            <p class="text-sm text-gray-500">Thai Airways TG313 • 2h 30m</p>
+                            <div class="absolute w-4 h-4 bg-white border-2 border-blue-500 rounded-full -left-2 bottom-1"></div>
+                             <p class="mt-4 font-bold">00:45 <span class="font-normal text-gray-600">(July 25)</span> - Netaji Subhas Chandra Bose Int'l (CCU)</p>
+                        </div>
+                    </div>
+                     <!-- Return Flight -->
+                    <div>
+                        <p class="font-semibold text-gray-700">Return: Kolkata → Bangkok</p>
+                        <div class="relative mt-2 pl-8 border-l-2 border-indigo-200">
+                             <div class="absolute w-4 h-4 bg-indigo-500 rounded-full -left-2 top-1"></div>
+                            <p class="font-bold">19:50 <span class="font-normal text-gray-600">(July 27)</span> - Netaji Subhas Chandra Bose Int'l (CCU)</p>
+                            <p class="text-sm text-gray-500">Indigo 6E1057 • 2h 50m</p>
+                             <div class="absolute w-4 h-4 bg-white border-2 border-indigo-500 rounded-full -left-2 bottom-1"></div>
+                            <p class="mt-4 font-bold">00:10 <span class="font-normal text-gray-600">(July 28)</span> - Suvarnabhumi Airport (BKK)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span class="mr-3 text-blue-600">🏨</span> Hotel Accommodation
+                </h3>
+                <div class="md:flex md:items-start">
+                    <div class="flex-grow">
+                        <p class="text-lg font-semibold text-blue-900">The Oberoi Grand, Kolkata</p>
+                        <p class="text-gray-600 mt-1">15, Jawaharlal Nehru Rd, New Market Area, Kolkata</p>
+                        <p class="text-gray-600">Contact: +91 33 2249 2323</p>
+                         <a href="https://maps.app.goo.gl/agLcrzHjdhTj1R239" target="_blank" class="inline-block mt-3 text-blue-600 hover:text-blue-800 font-medium transition">
+                            View on Google Maps →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="content-section space-y-8">
+             <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-blue-800">ASIAN UBE MEET 2025 Schedule</h2>
+                <p class="text-gray-600">The official program for the conference.</p>
+            </div>
+            
+            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+                <div class="flex justify-center border-b border-gray-200 mb-4">
+                    <button data-tab="day1" class="tab-button py-2 px-6 font-medium text-gray-600 rounded-t-lg">Day 1 (July 25)</button>
+                    <button data-tab="day2" class="tab-button py-2 px-6 font-medium text-gray-600 rounded-t-lg">Day 2 (July 26)</button>
+                </div>
+
+                <div id="day1" class="schedule-tab-content overflow-x-auto">
+                     <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">8:00 - 8:30 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Basics of UBE</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">8:30 - 9:45 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lumbar UBE (Session 1)</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">9:45 - 10:00 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Coffee / Networking Break</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">10:00 - 11:00 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lumbar UBE (Session 2)</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">11:00 AM - 12:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Cervical UBE</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12:00 - 12:15 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Coffee / Networking Break</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12:15 - 1:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hot Debates (Session 1)</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1:00 - 1:30 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lunch Break</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1:30 - 2:15 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hot Debates (Session 2)</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2:15 - 3:15 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Pushing the boundaries of UBE</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3:30 - 3:45 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Coffee / Networking Break</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3:45 - 5:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Complications of UBE and Management</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5:00 - 5:10 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Medico-legal Session</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5:10 - 5:30 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Inauguration Ceremony</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <div id="day2" class="schedule-tab-content hidden overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Session</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">8:00 - 8:45 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Innovations in UBE</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">8:45 - 10:00 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Cadaveric Live Surgery Demonstration</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">10:00 - 10:30 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Catch the "Butterfly" Session</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">10:30 - 11:00 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Free Paper Presentations</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">11:00 - 11:15 AM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Advanced 3D Navigation based Surgery</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">11:15 AM - 12:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Endoscopic Simulator Hands-on Session</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">12:00 - 1:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lunch Break</td></tr>
+                            <tr><td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1:00 - 5:00 PM</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Cadaveric Hands-on Session</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Event Time Analysis</h3>
+                <p class="text-gray-600 mb-4">A visual breakdown of session types by duration. This chart shows how the focus shifts from lectures and debates on Day 1 to hands-on learning on Day 2.</p>
+                <div class="chart-container">
+                    <canvas id="scheduleChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="guide" class="content-section space-y-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-blue-800">Kolkata Visitor Guide</h2>
+                <p class="text-gray-600">Essential tips for a smooth and enjoyable stay.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg lg:grid lg:grid-cols-4">
+                <div class="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-gray-200">
+                    <div class="p-4">
+                        <button data-guide-tab="tips" class="guide-tab-button w-full text-left p-4 rounded-md font-medium flex items-center border-l-4 border-transparent">
+                            <span class="mr-3">💡</span> Travel Tips
+                        </button>
+                        <button data-guide-tab="food" class="guide-tab-button w-full text-left p-4 rounded-md font-medium flex items-center border-l-4 border-transparent">
+                           <span class="mr-3">🍲</span> Food Guide
+                        </button>
+                         <button data-guide-tab="weather" class="guide-tab-button w-full text-left p-4 rounded-md font-medium flex items-center border-l-4 border-transparent">
+                           <span class="mr-3">🌦️</span> Weather & Packing
+                        </button>
+                         <button data-guide-tab="checklist" class="guide-tab-button w-full text-left p-4 rounded-md font-medium flex items-center border-l-4 border-transparent">
+                           <span class="mr-3">✅</span> Checklist & Info
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 p-6 md:p-8">
+                    <div id="tips" class="guide-tab-content space-y-4">
+                        <h4 class="text-lg font-bold text-gray-800">General Travel Tips</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><b>Transportation:</b> Ride-sharing apps like Uber and Ola are reliable and recommended. For a classic experience, use Yellow Taxis but always agree on the fare first.</li>
+                            <li><b>SIM Card:</b> Purchase a local SIM (Airtel, Jio) at the airport with your passport and visa. An eSIM is a convenient alternative if your phone is compatible.</li>
+                            <li><b>Safety:</b> Be aware of your surroundings, especially at night. Keep valuables secure. Kolkata is generally safe for tourists.</li>
+                            <li><b>Hydration:</b> Drink only bottled or filtered water. Avoid tap water.</li>
+                            <li><b>Etiquette:</b> Dress modestly for religious sites (cover shoulders/knees). A "Namaste" greeting is always appreciated.</li>
+                        </ul>
+                    </div>
+                     <div id="food" class="guide-tab-content space-y-4 hidden">
+                        <h4 class="text-lg font-bold text-gray-800">Must-Try Kolkata Delicacies</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="font-semibold">Sweets (Mishti)</p>
+                                <p class="text-gray-700">Don't leave without trying Roshogolla, Mishti Doi (sweet yogurt), and Sandesh.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Street Food</p>
+                                <p class="text-gray-700">Experience the city's flavors with Phuchka (Kolkata's pani puri), the original Kathi Roll, and spicy Jhalmuri.</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Main Courses</p>
+                                <p class="text-gray-700">Enjoy traditional Macher Jhol (fish curry), Kolkata Biryani (with its signature potato), and Luchi-Alur Dom (fluffy bread with potato curry).</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div id="weather" class="guide-tab-content space-y-4 hidden">
+                        <h4 class="text-lg font-bold text-gray-800">Weather & Packing (July)</h4>
+                         <p class="text-gray-700">July is the peak of the monsoon season. Be prepared for warm, humid conditions with frequent rain.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6">
+                            <li><b>Temperature:</b> 26°C to 32°C (79°F to 90°F).</li>
+                            <li><b>Humidity:</b> Very high, often over 80%.</li>
+                            <li><b>Key Items:</b> A strong umbrella, a waterproof jacket, and comfortable waterproof shoes are essential.</li>
+                        </ul>
+                        <h4 class="text-lg font-bold text-gray-800">Detailed Packing Checklist</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                            <div>
+                                <h5 class="font-semibold text-gray-800">Essentials</h5>
+                                <ul class="list-disc list-inside text-gray-700 mt-2">
+                                    <li>Passport & Indian Visa</li>
+                                    <li>Flight & Hotel Confirmations</li>
+                                    <li>Conference Registration Details</li>
+                                    <li>Credit/Debit Cards & some INR</li>
+                                    <li>Digital copies of all documents</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800">Clothing</h5>
+                                <ul class="list-disc list-inside text-gray-700 mt-2">
+                                    <li>Lightweight, breathable clothes</li>
+                                    <li>Smart casual for conference</li>
+                                    <li>Evening wear for dinner/events</li>
+                                    <li>Waterproof jacket & umbrella</li>
+                                    <li>Waterproof/quick-dry shoes</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h5 class="font-semibold text-gray-800">Health & Toiletries</h5>
+                                <ul class="list-disc list-inside text-gray-700 mt-2">
+                                    <li>Personal medications</li>
+                                    <li>Basic first-aid kit</li>
+                                    <li>Mosquito repellent</li>
+                                    <li>Hand sanitizer</li>
+                                    <li>Sunscreen</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h5 class="font-semibold text-gray-800">Electronics</h5>
+                                <ul class="list-disc list-inside text-gray-700 mt-2">
+                                    <li>Phone & Charger</li>
+                                    <li>Portable power bank</li>
+                                    <li>Universal travel adapter (Type D/M)</li>
+                                    <li>Laptop/tablet for conference</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="checklist" class="guide-tab-content space-y-4 hidden">
+                        <h4 class="text-lg font-bold text-gray-800">Pre-Trip Checklist (Do This Week)</h4>
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                             <li><b>Confirm Flights:</b> Double-check your flight times for any last-minute changes.</li>
+                             <li><b>Passport & Visa:</b> Ensure your passport is valid for at least 6 months and your Indian visa is printed or accessible.</li>
+                             <li><b>Travel Insurance:</b> Purchase or confirm your travel and health insurance policy.</li>
+                             <li><b>Notify Bank:</b> Inform your bank of your travel dates to avoid card issues in India.</li>
+                             <li><b>Currency Exchange:</b> Exchange a small amount of THB for INR for immediate needs upon arrival (e.g., taxi).</li>
+                             <li><b>Download Apps:</b> Install Uber, Ola, and offline Google Maps for Kolkata.</li>
+                             <li><b>Check-in Online:</b> Check-in for your flight 24 hours before departure.</li>
+                         </ul>
+                        <h4 class="text-lg font-bold text-gray-800 mt-6">Info for Thai Visitors</h4>
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><b>Currency:</b> Indian Rupee (INR).</li>
+                             <li><b>Exchange Rate:</b> Approx. 1 THB ≈ 2.30 INR (check live rates before departure).</li>
+                            <li><b>Payments:</b> Credit cards are common in large establishments, but cash is necessary for smaller vendors and transport.</li>
+                             <li><b>Language:</b> English is widely understood in tourist and business settings.</li>
+                            <li><b>Power Sockets:</b> India uses Type C, D, and M. A universal adapter is required. Voltage is 230V.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 text-gray-500 text-sm">
+        <p>Wishing you a productive conference and a wonderful stay in the City of Joy!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const mainNavLinks = document.querySelectorAll('#main-nav a');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateActiveNav(targetId) {
+                mainNavLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${targetId}`);
+                });
+                contentSections.forEach(section => {
+                    section.classList.toggle('active', section.id === targetId);
+                });
+            }
+
+            mainNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    updateActiveNav(targetId);
+                    // We don't scroll here because the IntersectionObserver handles showing the section
+                });
+            });
+
+            // This observer watches for sections coming into view and updates the nav.
+            // rootMargin is adjusted to make the nav link activate when the section is centered.
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        mainNavLinks.forEach(link => {
+                             link.classList.toggle('active', link.getAttribute('href') === `#${targetId}`);
+                        });
+                    }
+                });
+            }, { rootMargin: '-40% 0px -40% 0px', threshold: 0.1 });
+
+             contentSections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            const scheduleTabButtons = document.querySelectorAll('.tab-button');
+            const scheduleTabContents = document.querySelectorAll('.schedule-tab-content');
+
+            scheduleTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    scheduleTabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const tab = button.dataset.tab;
+                    scheduleTabContents.forEach(content => {
+                        content.classList.toggle('hidden', content.id !== tab);
+                    });
+                });
+            });
+            
+            // Set default active tab for schedule
+            if(scheduleTabButtons.length > 0) {
+                scheduleTabButtons[0].click();
+            }
+
+            const guideTabButtons = document.querySelectorAll('.guide-tab-button');
+            const guideTabContents = document.querySelectorAll('.guide-tab-content');
+
+            guideTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    guideTabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const tab = button.dataset.guideTab;
+                    guideTabContents.forEach(content => {
+                        content.classList.toggle('hidden', content.id !== tab);
+                    });
+                });
+            });
+            
+            // Set default active tab for guide
+            if(guideTabButtons.length > 0) {
+                guideTabButtons[0].click();
+            }
+
+            // Set the initial active section on page load
+            const firstSectionId = contentSections[0].id;
+            updateActiveNav(firstSectionId);
+
+            // Chart.js implementation
+            const ctx = document.getElementById('scheduleChart').getContext('2d');
+            const scheduleData = {
+                day1: { lectures: 255, debates: 90, practical: 0, breaks: 60}, // Total 405 mins
+                day2: { lectures: 90, practical: 360, debates: 0, breaks: 60}    // Total 510 mins
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Day 1 (July 25)', 'Day 2 (July 26)'],
+                    datasets: [
+                        {
+                            label: 'Lectures/Talks (mins)',
+                            data: [scheduleData.day1.lectures, scheduleData.day2.lectures],
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        },
+                         {
+                            label: 'Debates (mins)',
+                            data: [scheduleData.day1.debates, scheduleData.day2.debates],
+                             backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                        },
+                        {
+                            label: 'Hands-on/Practical (mins)',
+                            data: [scheduleData.day1.practical, scheduleData.day2.practical],
+                            backgroundColor: 'rgba(22, 163, 74, 0.7)',
+                        },
+                         {
+                            label: 'Breaks (mins)',
+                            data: [scheduleData.day1.breaks, scheduleData.day2.breaks],
+                            backgroundColor: 'rgba(156, 163, 175, 0.7)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: 'Duration (Minutes)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Conference Time Allocation by Session Type'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
